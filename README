@@ -1,0 +1,6 @@
+This is bootstrap program that initializes TheBoss operating system on various
+targets. It includes startup code and linker scripts, as well as a small
+bootstrapping application that simply calls probe_device_drivers using the
+provided device tree. The build process in this repo also builds the device
+tree that needs to be passed to it as argument to configure.
+
