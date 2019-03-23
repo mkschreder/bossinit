@@ -1,5 +1,5 @@
 AC_PREREQ([2.61])
-AC_INIT([ex-blinky], [0.1], [mkschreder.uk@gmail.com])
+AC_INIT([bossinit], [0.1], [mkschreder.uk@gmail.com])
 AC_CONFIG_AUX_DIR(aux-dist)
 AM_INIT_AUTOMAKE
 
