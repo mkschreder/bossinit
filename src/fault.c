@@ -43,9 +43,9 @@ void HardFault_Handler(void)
 	__asm volatile ("mrseq r0, msp\n");
 	__asm volatile ("mrsne r0, psp\n");
 	__asm volatile ("ldr r1, [r0, #24]\n");
-	__asm volatile ("ldr r2, addr\n");
+	__asm volatile ("ldr r2, _addr\n");
 	__asm volatile ("bx r2\n");
-	__asm volatile ("addr: .word HardFault_Handler_Stage2\n");
+	__asm volatile ("_addr: .word HardFault_Handler_Stage2\n");
 /*
     __asm volatile
     (

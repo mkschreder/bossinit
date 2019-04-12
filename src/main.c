@@ -15,11 +15,6 @@
 #include <libfirmware/usb.h>
 #include <libfirmware/timestamp.h>
 
-struct application {
-    led_controller_t leds;
-    serial_port_t uart;
-};
-
 void vApplicationTaskSWIHook(int task){
 	(void)task;
 	//swo_sendchar(4, '0'+task);
@@ -30,9 +25,7 @@ void vApplicationTaskSWIHook(int task){
 static void _init(void *ptr){
 	probe_device_drivers(_devicetree);
 
-	while(1){
-		thread_sleep_ms(1000);
-	}
+	thread_suspend();
 }
 
 int _close (int fd){
@@ -70,23 +63,17 @@ void * _sbrk (ptrdiff_t increment){
 }
 
 int main(void){
-    static struct application app;
-	struct application *self = &app;
-	memset(self, 0, sizeof(*self));
-
 	thread_create(
 		  _init,
 		  "init",
 		  350,
-		  &app,
+		  NULL,
 		  2,
 		  NULL);
 
 	thread_start_scheduler();
 
-	while(1) {
-		thread_sleep_ms(1000);
-	}
+	return 0;
 }
 
 void panic(const char *msg){
