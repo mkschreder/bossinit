@@ -278,10 +278,11 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 theboss_SOURCES = fault.c main.c devicetree.c $(am__append_4) \
 	$(am__append_6) $(am__append_8)
-theboss_LDFLAGS = -Wl,--no-undefined $(am__append_2) $(am__append_3) \
-	$(am__append_5) $(am__append_7) $(am__append_9) \
-	$(WITH_DRIVERS)
-theboss_LDADD = -ldriver -lfirmware -lfdt $(WITH_LIBS) $(am__append_1)
+theboss_LDFLAGS = -Wl,--no-undefined -Wl,-Map,theboss.map \
+	$(am__append_2) $(am__append_3) $(am__append_5) \
+	$(am__append_7) $(am__append_9) $(WITH_DRIVERS)
+theboss_LDADD = $(WITH_LIBS) -ldriver -lfirmware -lfdt -lm \
+	$(am__append_1)
 AUTOMAKE_OPTIONS = subdir-objects
 all: all-am
 
@@ -631,7 +632,7 @@ uninstall-am: uninstall-binPROGRAMS
 
 devicetree.c: $(WITH_DEVICETREE) 
 	@echo "DTB: $(1)"
-	$(Q)$(CPP) $(CFLAGS) -undef -x assembler-with-cpp $^ | dtc -O dtb -o $@.dtb
+	$(Q)$(CPP) $(CFLAGS) -undef -x assembler-with-cpp $^ > $@.dtspp && dtc -O dtb $@.dtspp -o $@.dtb
 	$(Q)echo "unsigned char _devicetree[] = { $$(cat $@.dtb | xxd -i) };" > $@
 
 .PHONY: theboss

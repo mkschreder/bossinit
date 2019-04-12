@@ -159,14 +159,12 @@ g_pfnVectors:
   .word  0
   .word  PendSV_Handler
   .word  SysTick_Handler
-  
-  /* External Interrupts */
   .word     WWDG_IRQHandler                   /* Window WatchDog                              */                                        
   .word     PVD_IRQHandler                    /* PVD through EXTI Line detection              */                        
   .word     TAMP_STAMP_IRQHandler             /* Tamper and TimeStamps through the EXTI line  */            
   .word     RTC_WKUP_IRQHandler               /* RTC Wakeup through the EXTI line             */                      
   .word     FLASH_IRQHandler                  /* FLASH                                        */                                          
-  .word     RCC_IRQHandler                    /* RCC                                          */                                            
+  .word     RCC_IRQHandler                    /* RCC                                          */                                          
   .word     EXTI0_IRQHandler                  /* EXTI Line0                                   */                        
   .word     EXTI1_IRQHandler                  /* EXTI Line1                                   */                          
   .word     EXTI2_IRQHandler                  /* EXTI Line2                                   */                          

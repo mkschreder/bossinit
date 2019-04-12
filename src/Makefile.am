@@ -1,7 +1,7 @@
 bin_PROGRAMS = theboss
 theboss_SOURCES=fault.c main.c devicetree.c
-theboss_LDFLAGS=-Wl,--no-undefined
-theboss_LDADD=-ldriver -lfirmware -lfdt $(WITH_LIBS)
+theboss_LDFLAGS=-Wl,--no-undefined -Wl,-Map,theboss.map
+theboss_LDADD=$(WITH_LIBS) -ldriver -lfirmware -lfdt -lm
 
 if WITH_TARGET_LINUX
 theboss_LDADD+=-lrt -lpthread
@@ -31,7 +31,7 @@ AUTOMAKE_OPTIONS = subdir-objects
 
 devicetree.c: $(WITH_DEVICETREE) 
 	@echo "DTB: $(1)"
-	$(Q)$(CPP) $(CFLAGS) -undef -x assembler-with-cpp $^ | dtc -O dtb -o $@.dtb
+	$(Q)$(CPP) $(CFLAGS) -undef -x assembler-with-cpp $^ > $@.dtspp && dtc -O dtb $@.dtspp -o $@.dtb
 	$(Q)echo "unsigned char _devicetree[] = { $$(cat $@.dtb | xxd -i) };" > $@
 
 .PHONY: theboss

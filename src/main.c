@@ -35,6 +35,40 @@ static void _init(void *ptr){
 	}
 }
 
+int _close (int fd){
+	printk("close\n");
+	return 0;
+}
+/*
+int _fstat (int fd, struct stat * buf){
+	printk("fstat\n");
+}
+*/
+int _isatty (int fd){
+	printk("isatty\n");
+	return 0;
+}
+off_t _lseek (int fd, off_t offset, int whence){
+	printk("seek\n");
+	return 0;
+}
+int _open (const char * pathname, int flags){
+	printk("open\n");
+	return 123;
+}
+ssize_t _read (int fd, void * buf, size_t count){
+	printk("read %d", fd);
+	return 1;
+}
+ssize_t _write (int fd, const void * buf, size_t count){
+	printk("write %d\n", fd);
+	return 1;
+}
+void * _sbrk (ptrdiff_t increment){
+	printk("sbrk %d\n", (int)increment);
+	return kzmalloc((size_t)increment);
+}
+
 int main(void){
     static struct application app;
 	struct application *self = &app;
@@ -43,7 +77,7 @@ int main(void){
 	thread_create(
 		  _init,
 		  "init",
-		  250,
+		  350,
 		  &app,
 		  2,
 		  NULL);

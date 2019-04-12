@@ -18,16 +18,17 @@ _estack = ORIGIN(RAM) + LENGTH(RAM);
 _Min_Heap_Size = 0xE00;			/* required amount of heap	*/
 _Min_Stack_Size = 0x1C00; /* required amount of stack */
 
-
 /* Define output sections */
 SECTIONS
 {
 	/* The startup code goes first into FLASH */
 	.isr_vector :
 	{
+		__isr_vector_start = .;
 		. = ALIGN(4);
 		KEEP(*(.isr_vector)) /* Startup code */
 		. = ALIGN(4);
+		__isr_vector_end = .;
 	} >FLASH
 
 	/* The program code and other data goes into FLASH */
@@ -69,6 +70,7 @@ SECTIONS
 		KEEP (*(.preinit_array*))
 		PROVIDE_HIDDEN (__preinit_array_end = .);
 	} >FLASH
+
 	.init_array :
 	{
 		PROVIDE_HIDDEN (__init_array_start = .);
