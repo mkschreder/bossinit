@@ -29,8 +29,8 @@ static void _init(void *ptr){
 }
 
 int _close (int fd){
-	printk("close\n");
-	return 0;
+	printk(PRINT_ERROR "close not implemented\n");
+	return -1;
 }
 /*
 int _fstat (int fd, struct stat * buf){
@@ -38,28 +38,30 @@ int _fstat (int fd, struct stat * buf){
 }
 */
 int _isatty (int fd){
-	printk("isatty\n");
-	return 0;
+	printk(PRINT_ERROR "isatty not implemented\n");
+	return -1;
 }
 off_t _lseek (int fd, off_t offset, int whence){
-	printk("seek\n");
-	return 0;
+	printk(PRINT_ERROR "seek not implemented\n");
+	return -1;
 }
 int _open (const char * pathname, int flags){
-	printk("open\n");
-	return 123;
+	printk(PRINT_ERROR "open not implemented\n");
+	return -1;
 }
 ssize_t _read (int fd, void * buf, size_t count){
-	printk("read %d", fd);
-	return 1;
+	printk(PRINT_ERROR "read %d not implemented\n", fd);
+	return -1;
 }
+
 ssize_t _write (int fd, const void * buf, size_t count){
-	printk("write %d\n", fd);
-	return 1;
+	printk(PRINT_ERROR "write %d not implemented\n", fd);
+	return -1;
 }
+
 void * _sbrk (ptrdiff_t increment){
-	printk("sbrk %d\n", (int)increment);
-	return kzmalloc((size_t)increment);
+	printk(PRINT_ERROR "sbrk %d not implemented\n", (int)increment);
+	return 0;
 }
 
 int main(void){

@@ -46,18 +46,5 @@ void HardFault_Handler(void)
 	__asm volatile ("ldr r2, _addr\n");
 	__asm volatile ("bx r2\n");
 	__asm volatile ("_addr: .word HardFault_Handler_Stage2\n");
-/*
-    __asm volatile
-    (
-        " tst lr, #4                                                \n"
-        " ite eq                                                    \n"
-        " mrseq r0, msp                                             \n"
-        " mrsne r0, psp                                             \n"
-        " ldr r1, [r0, #24]                                         \n"
-        " ldr r2, handler2_address_const                            \n"
-        " bx r2                                                     \n"
-        " handler2_address_const: .word prvGetRegistersFromStack2    \n"
-    );
-*/
 }
 
