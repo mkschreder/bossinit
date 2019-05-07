@@ -31,7 +31,7 @@ AUTOMAKE_OPTIONS = subdir-objects
 
 devicetree.c: $(WITH_DEVICETREE) 
 	@echo "DTB: $(1)"
-	$(Q)$(CPP) $(CFLAGS) -undef -x assembler-with-cpp $^ > $@.dtspp && dtc -O dtb $@.dtspp -o $@.dtb
+	$(Q)$(CPP) $(CFLAGS) -nostdinc -undef -x assembler-with-cpp $^ > $@.dtspp && dtc -O dtb $@.dtspp -o $@.dtb
 	$(Q)echo "unsigned char _devicetree[] = { $$(cat $@.dtb | xxd -i) };" > $@
 
 .PHONY: theboss
