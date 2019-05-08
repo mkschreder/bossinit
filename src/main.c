@@ -22,7 +22,7 @@ void vApplicationTaskSWIHook(int task){
 	//dac_write(&dac1, 2, task * 100);
 }
 
-static void _init(void *ptr){
+static void _init_drivers(void *ptr){
 	probe_device_drivers(_devicetree);
 
 	thread_suspend();
@@ -66,7 +66,7 @@ void * _sbrk (ptrdiff_t increment){
 
 int main(void){
 	thread_create(
-		  _init,
+		  _init_drivers,
 		  "init",
 		  350,
 		  NULL,
